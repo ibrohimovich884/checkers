@@ -1,0 +1,77 @@
+.lobby-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2c3e50 100%);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.lobby-card {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 40px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+.lobby-title {
+    color: #fff;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.lobby-subtitle {
+    color: #ccc;
+    margin-bottom: 30px;
+}
+
+.lobby-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.lobby-input {
+    padding: 15px;
+    border-radius: 10px;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 1rem;
+    outline: none;
+    border: 1px solid transparent;
+    transition: 0.3s;
+}
+
+.lobby-input:focus {
+    border-color: #f39c12;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.lobby-button {
+    padding: 15px;
+    border-radius: 10px;
+    border: none;
+    background: #f39c12;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.lobby-button:hover {
+    background: #e67e22;
+    transform: translateY(-2px);
+}
+
+.lobby-footer {
+    margin-top: 20px;
+    font-size: 0.8rem;
+    color: #777;
+}

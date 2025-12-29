@@ -1,0 +1,34 @@
+.checkers-board {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    height: 500px;
+    border: 10px solid #3e2723;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.board-row {
+    display: flex;
+    flex: 1;
+}
+
+.board-cell {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.board-cell.light {
+    background-color: #d7ccc8;
+}
+
+.board-cell.dark {
+    background-color: #5d4037;
+}
+
+.board-cell.selected {
+    background-color: #ffeb3b !important;
+    opacity: 0.8;
+}
