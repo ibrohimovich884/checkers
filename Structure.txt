@@ -1,0 +1,12 @@
+client/
+├── src/
+│   ├── components/
+│   │   ├── Board.jsx      // 8x8 katakli taxta
+│   │   ├── Piece.jsx      // Shashka donalari
+│   │   └── GameInfo.jsx   // Navbat kimda, ochkolar
+│   ├── hooks/
+│   │   └── useSocket.js   // Socket ulanishini boshqarish
+│   ├── utils/
+│   │   └── checkers.js    // Client-side validatsiya
+│   └── App.js
+└── package.json
