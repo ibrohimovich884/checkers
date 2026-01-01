@@ -1,29 +1,28 @@
-import './Board.css';
-import Piece from './Piece';
+import React from 'react';
 
-const Board = ({ board, onCellClick, selected }) => {
-  return (
-    <div className="checkers-board">
-      {board.map((row, r) => (
-        <div key={r} className="board-row">
-          {row.map((cell, c) => {
-            const isDark = (r + c) % 2 !== 0;
-            const isSelected = selected?.r === r && selected?.c === c;
-
-            return (
-              <div
-                key={`${r}-${c}`}
-                className={`board-cell ${isDark ? 'dark' : 'light'} ${isSelected ? 'selected' : ''}`}
-                onClick={() => onCellClick(r, c)}
-              >
-                {cell !== 0 && <Piece type={cell} />}
-              </div>
-            );
-          })}
+const Board = ({ board, selectedPos, onCellClick }) => {
+    return (
+        <div className="board">
+            {board.map((row, r) =>
+                row.map((cell, c) => {
+                    const isSelected = selectedPos?.r === r && selectedPos?.c === c;
+                    return (
+                        <div 
+                            key={`${r}-${c}`} 
+                            className={`cell ${(r + c) % 2 === 0 ? 'light' : 'dark'} ${isSelected ? 'selected' : ''}`} 
+                            onClick={() => onCellClick(r, c)}
+                        >
+                            {cell !== 0 && (
+                                <div className={`piece ${cell % 2 === 1 ? 'white' : 'black'} ${cell > 2 ? 'king' : ''}`}>
+                                    {cell > 2 && <span className="crown">👑</span>}
+                                </div>
+                            )}
+                        </div>
+                    );
+                })
+            )}
         </div>
-      ))}
-    </div>
-  );
+    );
 };
 
 export default Board;

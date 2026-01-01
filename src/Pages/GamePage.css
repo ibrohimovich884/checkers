@@ -92,3 +92,30 @@
     box-shadow: 0 0 10px gold;
 }
 
+.player-info {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background: #2c3e50;
+    color: white;
+    border-radius: 8px;
+    margin: 10px 0;
+    width: 300px;
+}
+
+.player-info img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+    border: 2px solid #ecf0f1;
+}
+
+.turn-indicator.active {
+    width: 15px;
+    height: 15px;
+    background: #27ae60;
+    border-radius: 50%;
+    margin-left: auto;
+    box-shadow: 0 0 10px #27ae60;
+}
