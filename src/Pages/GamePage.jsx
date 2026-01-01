@@ -58,22 +58,45 @@ const GamePage = () => {
         }
     };
 
+    // GamePage.jsx ichida
+    const [players, setPlayers] = useState([]);
+
+    useEffect(() => {
+        socket.on('gameState', (data) => {
+            setPlayers(data.players);
+        });
+    }, []);
+
+    // O'yinchilarni ajratib olish (Mening ID-im orqali)
+    const me = players.find(p => p.id === myId);
+    const opponent = players.find(p => p.id !== myId);
+
+
     return (
         <div className="game-container">
             <h3>Xona: {roomId} | Navbat: {turn.toUpperCase()}</h3>
+            <div className="player-info opponent">
+                <img src={opponent?.avatar || '/default-avatar.png'} alt="avatar" />
+                <span>{opponent?.username || 'Kutilmoqda...'}</span>
+                <div className={`turn-indicator ${turn === 'black' ? 'active' : ''}`}></div>
+            </div>
             <div className="board">
-                {board.map((row, r) => (
+                {board.map((row, r) =>
                     row.map((cell, c) => (
-                        <div 
-                            key={`${r}-${c}`}
-                            className={`cell ${(r + c) % 2 !== 0 ? 'dark' : 'light'} ${selectedPos?.r === r && selectedPos?.c === c ? 'selected' : ''}`}
-                            onClick={() => handleCellClick(r, c)}
-                        >
-                            {cell === 1 && <div className="piece white"></div>}
-                            {cell === 2 && <div className="piece black"></div>}
+                        <div key={`${r}-${c}`} className={`cell ${(r + c) % 2 === 0 ? 'light' : 'dark'}`} onClick={() => handleCellClick(r, c)}>
+                            {cell !== 0 && (
+                                <div className={`piece ${cell % 2 === 1 ? 'white' : 'black'} ${cell > 2 ? 'king' : ''}`}>
+                                    {cell > 2 && ''}
+                                </div>
+                            )}
                         </div>
                     ))
-                ))}
+                )}
+            </div>
+            <div className="player-info me">
+                <img src={me?.avatar || '/default-avatar.png'} alt="avatar" />
+                <span>{me?.username} (Siz)</span>
+                <div className={`turn-indicator ${turn === 'white' ? 'active' : ''}`}></div>
             </div>
         </div>
     );
