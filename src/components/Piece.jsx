@@ -1,5 +1,4 @@
 import React from 'react';
-import './Price.css';
 
 const Piece = ({ type }) => {
   // 1: Oq, 2: Qora, 3: Oq Dama, 4: Qora Dama
