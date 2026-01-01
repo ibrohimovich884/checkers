@@ -1,0 +1,93 @@
+.player-info {
+    display: flex;
+    align-items: center;
+    padding: 10px 14px;
+    background: #ffffff; /* Toza oq fon */
+    border-radius: 15px;
+    margin: 8px auto;
+    width: 92vw;
+    max-width: 380px;
+    box-sizing: border-box;
+    /* Box-shadow o'rniga ingichka chegara */
+    border: 1px solid #fce4ec; 
+    transition: all 0.3s ease;
+    gap: 12px;
+}
+
+/* Navbat kelganda - Faqat rang va chegara o'zgaradi */
+.active-turn {
+    border: 2px solid #ff4d6d; /* Love Island pushti */
+    background: #fff5f7; /* Juda och pushti fon */
+    transform: scale(1.01);
+}
+
+.player-info img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ff4d6d;
+    background: #fce4ec;
+}
+
+.player-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.username {
+    font-size: 14px;
+    font-weight: 700;
+    color: #2d3436; /* To'q kulrang, qora emas */
+}
+
+.color-tag {
+    font-size: 10px;
+    font-weight: 600;
+    color: #ff4d6d;
+    text-transform: uppercase;
+    margin-top: 2px;
+}
+
+/* Navbat indikatori - Soya o'rniga oddiy rang */
+.turn-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #dfe6e9;
+}
+
+.turn-indicator.active {
+    background: #ff4d6d;
+    /* Soya o'rniga oddiy animatsiya */
+    animation: simple-pulse 1.2s infinite;
+}
+
+@keyframes simple-pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+
+/* O'zim uchun (Me) */
+.player-info.me {
+    border-left: 5px solid #ff4d6d; /* Chap tomonda pushti chiziq */
+}
+
+/* Raqib uchun (Opponent) */
+.player-info.opponent {
+    border-left: 5px solid #fd79a8; /* Ochroq pushti chiziq */
+}
+
+/* Kichik ekranlar (iPhone SE kabi) */
+@media (max-width: 360px) {
+    .player-info {
+        padding: 8px 10px;
+        gap: 10px;
+    }
+    .player-info img {
+        width: 38px;
+        height: 38px;
+    }
+}
