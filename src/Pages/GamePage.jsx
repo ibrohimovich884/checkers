@@ -1,66 +1,79 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import socket from '../api/socket';
-import Board from '../components/Board';
-import GameInfo from '../components/GameInfo';
 import './GamePage.css';
 
 const GamePage = () => {
     const { roomId } = useParams();
-    const navigate = useNavigate();
-    const [gameState, setGameState] = useState(null);
-    const [selected, setSelected] = useState(null);
-    const [error, setError] = useState('');
+    const [board, setBoard] = useState([]);
+    const [turn, setTurn] = useState('white');
+    const [selectedPos, setSelectedPos] = useState(null);
 
     useEffect(() => {
-        const token = localStorage.getItem("love_island_token");
-        if (!token) {
-            navigate('/login'); // Agar token bo'lmasa asosiy loyihaga qaytaradi
-            return;
-        }
-
+        // Serverga ulanish
         socket.connect();
+
+        // Xonaga qo'shilish
         socket.emit('joinRoom', roomId);
 
-        socket.on('gameState', (data) => setGameState(data));
-        socket.on('updateBoard', (data) => setGameState(data));
-        socket.on('error', (msg) => setError(msg));
+        // O'yin holatini olish
+        socket.on('gameState', (data) => {
+            setBoard(data.board);
+            setTurn(data.turn);
+        });
+
+        // Har bir harakatdan keyin doskani yangilash
+        socket.on('updateBoard', (data) => {
+            setBoard(data.board);
+            setTurn(data.turn);
+            setSelectedPos(null);
+        });
+
+        socket.on('gameOver', (data) => {
+            alert(`O'yin tugadi! G'olib: ${data.winner}`);
+        });
 
         return () => {
             socket.off('gameState');
             socket.off('updateBoard');
-            socket.off('error');
+            socket.off('gameOver');
             socket.disconnect();
         };
-    }, [roomId, navigate]);
+    }, [roomId]);
 
-    const onCellClick = (r, c) => {
-        if (selected) {
-            socket.emit('makeMove', { roomId, from: selected, to: { r, c } });
-            setSelected(null);
-        } else {
-            if (gameState.board[r][c] !== 0) {
-                setSelected({ r, c });
+    const handleCellClick = (r, c) => {
+        if (!selectedPos) {
+            // Agar tanlangan dona o'zimizniki bo'lsa tanlaymiz
+            if (board[r][c] !== 0) {
+                setSelectedPos({ r, c });
             }
+        } else {
+            // Tanlangan donani yangi joyga surish uchun serverga yuboramiz
+            socket.emit('makeMove', {
+                roomId,
+                from: selectedPos,
+                to: { r, c }
+            });
+            setSelectedPos(null);
         }
     };
 
-    if (!gameState) return <div className="loading">Yuklanmoqda...</div>;
-
     return (
-        <div className="game-page-container">
-            <h2 className="game-title">Shashka Onlayn</h2>
-            <div className="game-layout">
-                <Board 
-                    board={gameState.board} 
-                    onCellClick={onCellClick} 
-                    selected={selected} 
-                />
-                <GameInfo 
-                    turn={gameState.turn} 
-                    roomId={roomId} 
-                    error={error}
-                />
+        <div className="game-container">
+            <h3>Xona: {roomId} | Navbat: {turn.toUpperCase()}</h3>
+            <div className="board">
+                {board.map((row, r) => (
+                    row.map((cell, c) => (
+                        <div 
+                            key={`${r}-${c}`}
+                            className={`cell ${(r + c) % 2 !== 0 ? 'dark' : 'light'} ${selectedPos?.r === r && selectedPos?.c === c ? 'selected' : ''}`}
+                            onClick={() => handleCellClick(r, c)}
+                        >
+                            {cell === 1 && <div className="piece white"></div>}
+                            {cell === 2 && <div className="piece black"></div>}
+                        </div>
+                    ))
+                ))}
             </div>
         </div>
     );

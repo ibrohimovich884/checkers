@@ -14,4 +14,4 @@ const GameInfo = ({ turn, roomId, error }) => {
     );
 };
 
-export default GameInfo; // <--- SHU QATORNI TEKSHIRING
+export default GameInfo;

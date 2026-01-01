@@ -20,3 +20,13 @@
     margin-bottom: 20px;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
+
+.game-container { display: flex; flex-direction: column; align-items: center; background: #2c3e50; min-height: 100vh; color: white; padding: 20px; }
+.board { display: grid; grid-template-columns: repeat(8, 60px); grid-template-rows: repeat(8, 60px); border: 5px solid #34495e; }
+.cell { width: 60px; height: 60px; display: flex; justify-content: center; align-items: center; cursor: pointer; }
+.dark { background-color: #7f8c8d; }
+.light { background-color: #ecf0f1; }
+.selected { background-color: #f1c40f !important; }
+.piece { width: 45px; height: 45px; border-radius: 50%; border: 2px solid #333; }
+.white { background: radial-gradient(circle, #fff, #ccc); }
+.black { background: radial-gradient(circle, #333, #000); }
