@@ -1,51 +1,46 @@
-/* Asosiy konteyner - To'liq ekran markazda */
+/* Asosiy konteyner - Love Island atmosferasi */
 .game-page {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between; /* PlayerCardlar orasida masofa qolishi uchun */
+    justify-content: center;
     min-height: 100vh;
-    background: radial-gradient(circle at top, #fff5f8 0%, #eef9ff 100%);
-    padding: 40px 15px;
+    /* Quyoshli sohil va osmon rangi */
+    background: linear-gradient(180deg, #fff5f8 0%, #eef9ff 100%);
+    padding: env(safe-area-inset-top) 10px 20px 10px;
     box-sizing: border-box;
 }
 
 .game-header h3 {
     color: #ff85a1;
-    font-size: 1rem;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
     font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 20px;
+    letter-spacing: 1px;
 }
 
-/* Board Wrapper - Taxtani kvadrat saqlaydi */
+/* Board Wrapper - Taxtani markazda ushlab turadi */
 .board-container {
-    width: 100%;
-    max-width: 400px; /* Planshetlarda juda katta bo'lib ketmasligi uchun */
-    aspect-ratio: 1 / 1; /* Telefonda har doim kvadrat bo'lishini kafolatlaydi */
-    padding: 8px;
+    padding: 6px;
     background: #ffffff;
-    border-radius: 20px;
-    box-shadow: 0 15px 35px rgba(255, 133, 161, 0.15);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    border-radius: 12px;
+    border: 1px solid #fce4ec;
     margin: 10px 0;
 }
 
-/* Board - Grid tizimi */
+/* Board Mobile-First - Grid tizimi */
 .board {
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     grid-template-rows: repeat(8, 1fr);
-    width: 100%;
-    height: 100%;
-    background-color: #ffcad4;
-    border: 2px solid #ffcad4;
-    border-radius: 12px;
-    overflow: hidden; /* Kataklar burchaklari chiqib ketmasligi uchun */
-    touch-action: manipulation; /* Mobil zoom lag'ini yo'qotadi */
+    width: 90vw;
+    height: 90vw;
+    max-width: 380px;
+    max-height: 380px;
+    background-color: #ffcad4; /* Kataklar orasidagi chiziq rangi */
+    border: 4px solid #ffcad4;
+    border-radius: 4px;
 }
 
 .cell {
@@ -54,34 +49,24 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: background-color 0.2s ease;
+    cursor: pointer;
 }
 
-/* Kataklar ranglari - Pastel tonlar */
+/* Kataklar ranglari */
 .light { background-color: #ffffff; }
-.dark { background-color: #ffeef2; } 
+.dark { background-color: #fce4ec; } 
 
-/* Tanlangan katak - Yorqinroq effekt */
+/* Tanlangan katak effekti */
 .selected {
-    background-color: #ff85a1 !important;
-    box-shadow: inset 0 0 12px rgba(0,0,0,0.08);
+    background-color: #faedcd !important;
+    outline: 2px solid #ff85a1;
 }
 
-/* PlayerCardlar uchun qo'shimcha (agar ular komponent ichida bo'lmasa) */
-.player-card {
-    width: 100%;
-    max-width: 380px;
-    /* PlayerCard stilingizga qarab bu yerga padding qo'shishingiz mumkin */
+/* Responsive moslashuv */
+@media (max-width: 370px) {
+    .board {
+        width: 95vw;
+        height: 95vw;
+    }
 }
 
-/* Animatsiyalar */
-@keyframes piecePop {
-    from { transform: scale(0.8); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-}
-
-.cell img, .cell .piece {
-    width: 85%;
-    height: 85%;
-    animation: piecePop 0.3s ease-out;
-}
