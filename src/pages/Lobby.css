@@ -1,0 +1,115 @@
+.lobby-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    /* Love Island-ga xos yumshoq gradient */
+    background: linear-gradient(135deg, #fff5f8 0%, #eef9ff 100%);
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.lobby-card {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    padding: 35px 25px;
+    border-radius: 24px;
+    width: 100%;
+    max-width: 360px;
+    text-align: center;
+    border: 1px solid #fce4ec;
+    /* Box shadow o'rniga nozik chegara */
+}
+
+.lobby-header {
+    margin-bottom: 25px;
+}
+
+.heart-icon {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 10px;
+    animation: pulse-heart 2s infinite;
+}
+
+.lobby-title {
+    color: #ff4d6d;
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin: 0;
+    letter-spacing: -0.5px;
+}
+
+.lobby-subtitle {
+    color: #00b4d8;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-top: 5px;
+}
+
+.lobby-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.lobby-input {
+    padding: 14px 18px;
+    border-radius: 15px;
+    border: 2px solid #fce4ec;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s ease;
+    background: #fff;
+    color: #ff4d6d;
+}
+
+.lobby-input:focus {
+    border-color: #ff85a1;
+    background: #fff5f8;
+}
+
+.lobby-input::placeholder {
+    color: #ffb1c1;
+}
+
+.lobby-button {
+    padding: 14px;
+    border-radius: 15px;
+    border: none;
+    background: #ff4d6d;
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.lobby-button:active {
+    transform: scale(0.98);
+    background: #c9184a;
+}
+
+.lobby-footer {
+    margin-top: 25px;
+    font-size: 11px;
+    color: #ffb1c1;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+@keyframes pulse-heart {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Mobile optimallashtirish */
+@media (max-width: 380px) {
+    .lobby-card {
+        padding: 25px 20px;
+    }
+    .lobby-title {
+        font-size: 1.5rem;
+    }
+}
