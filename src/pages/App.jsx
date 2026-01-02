@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Lobby from './Pages/Lobby.jsx';
-import GamePage from './Pages/GamePage';
+import Lobby from './pages/Lobby.jsx';
+import GamePage from './pages/GamePage';
 function App() {
   return (
     <Router>
