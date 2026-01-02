@@ -1,100 +1,51 @@
-/* Asosiy konteyner - Love Island atmosferasi */
+/* Asosiy konteyner - To'liq ekran markazda */
 .game-page {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between; /* PlayerCardlar orasida masofa qolishi uchun */
     min-height: 100vh;
-    /* Quyoshli sohil va osmon rangi */
-    background: linear-gradient(180deg, #fff5f8 0%, #eef9ff 100%);
-    padding: env(safe-area-inset-top) 10px 20px 10px;
+    background: radial-gradient(circle at top, #fff5f8 0%, #eef9ff 100%);
+    padding: 40px 15px;
     box-sizing: border-box;
 }
 
 .game-header h3 {
     color: #ff85a1;
-    font-size: 1.1rem;
-    margin-bottom: 5px;
+    font-size: 1rem;
     font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
 }
 
-/* Board Wrapper - Taxtani markazda ushlab turadi */
+/* Board Wrapper - Taxtani kvadrat saqlaydi */
 .board-container {
-    padding: 6px;
+    width: 100%;
+    max-width: 400px; /* Planshetlarda juda katta bo'lib ketmasligi uchun */
+    aspect-ratio: 1 / 1; /* Telefonda har doim kvadrat bo'lishini kafolatlaydi */
+    padding: 8px;
     background: #ffffff;
-    border-radius: 12px;
-    border: 1px solid #fce4ec;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(255, 133, 161, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin: 10px 0;
 }
 
-/* Board Mobile-First - Grid tizimi */
-.board {
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: repeat(8, 1fr);
-    width: 90vw;
-    height: 90vw;
-    max-width: 380px;
-    max-height: 380px;
-    background-color: #ffcad4; /* Kataklar orasidagi chiziq rangi */
-    border: 4px solid #ffcad4;
-    border-radius: 4px;
-}
-
-.cell {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-}
-
-/* Kataklar ranglari */
-.light { background-color: #ffffff; }
-.dark { background-color: #fce4ec; } 
-
-/* Tanlangan katak effekti */
-.selected {
-    background-color: #faedcd !important;
-    outline: 2px solid #ff85a1;
-}
-
-/* Responsive moslashuv */
-@media (max-width: 360px) {
-    .board {
-        width: 95vw;
-        height: 95vw;
-    }
-}
-
-
-/* Taxta atrofidagi oq "podshka" */
-.board-wrapper {
-    width: 95vw;          /* Ekran kengligining 95% qismi */
-    max-width: 400px;     /* Katta telefonlar/planshetlar uchun chegara */
-    aspect-ratio: 1 / 1;  /* Eni va bo'yi doim teng (kvadrat) bo'ladi */
-    background: #ffffff;
-    padding: 8px;
-    border-radius: 16px;
-    box-shadow: 0 10px 25px rgba(255, 133, 161, 0.15); /* Love pink shadow */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 15px 0;
-}
-
+/* Board - Grid tizimi */
 .board {
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     grid-template-rows: repeat(8, 1fr);
     width: 100%;
     height: 100%;
-    border-radius: 8px;
-    overflow: hidden; /* Burchakdagi kataklar ham yumaloq ko'rinishi uchun */
+    background-color: #ffcad4;
     border: 2px solid #ffcad4;
+    border-radius: 12px;
+    overflow: hidden; /* Kataklar burchaklari chiqib ketmasligi uchun */
+    touch-action: manipulation; /* Mobil zoom lag'ini yo'qotadi */
 }
 
 .cell {
@@ -103,28 +54,34 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    touch-action: manipulation; /* Mobil brauzerda double-tap zoomni oldini oladi */
+    transition: background-color 0.2s ease;
 }
 
-/* Ranglar palitrasi */
+/* Kataklar ranglari - Pastel tonlar */
 .light { background-color: #ffffff; }
-.dark { background-color: #ffeef2; } /* Juda och pushti */
+.dark { background-color: #ffeef2; } 
 
+/* Tanlangan katak - Yorqinroq effekt */
 .selected {
-    background-color: #ff85a1 !important; /* Tanlanganda qizg'ish-pushti */
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+    background-color: #ff85a1 !important;
+    box-shadow: inset 0 0 12px rgba(0,0,0,0.08);
 }
 
-/* Donalar (Pieces) uchun stil */
-.piece {
-    width: 80%;
-    height: 80%;
-    border-radius: 50%;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.12);
+/* PlayerCardlar uchun qo'shimcha (agar ular komponent ichida bo'lmasa) */
+.player-card {
+    width: 100%;
+    max-width: 380px;
+    /* PlayerCard stilingizga qarab bu yerga padding qo'shishingiz mumkin */
 }
 
-/* Animatsiya donani tanlaganda */
-.selected .piece {
-    transform: scale(1.1);
-    transition: transform 0.2s ease;
+/* Animatsiyalar */
+@keyframes piecePop {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.cell img, .cell .piece {
+    width: 85%;
+    height: 85%;
+    animation: piecePop 0.3s ease-out;
 }
