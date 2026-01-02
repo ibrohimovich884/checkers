@@ -69,3 +69,62 @@
         height: 95vw;
     }
 }
+
+
+/* Taxta atrofidagi oq "podshka" */
+.board-wrapper {
+    width: 95vw;          /* Ekran kengligining 95% qismi */
+    max-width: 400px;     /* Katta telefonlar/planshetlar uchun chegara */
+    aspect-ratio: 1 / 1;  /* Eni va bo'yi doim teng (kvadrat) bo'ladi */
+    background: #ffffff;
+    padding: 8px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(255, 133, 161, 0.15); /* Love pink shadow */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 15px 0;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    overflow: hidden; /* Burchakdagi kataklar ham yumaloq ko'rinishi uchun */
+    border: 2px solid #ffcad4;
+}
+
+.cell {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    touch-action: manipulation; /* Mobil brauzerda double-tap zoomni oldini oladi */
+}
+
+/* Ranglar palitrasi */
+.light { background-color: #ffffff; }
+.dark { background-color: #ffeef2; } /* Juda och pushti */
+
+.selected {
+    background-color: #ff85a1 !important; /* Tanlanganda qizg'ish-pushti */
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Donalar (Pieces) uchun stil */
+.piece {
+    width: 80%;
+    height: 80%;
+    border-radius: 50%;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.12);
+}
+
+/* Animatsiya donani tanlaganda */
+.selected .piece {
+    transform: scale(1.1);
+    transition: transform 0.2s ease;
+}
